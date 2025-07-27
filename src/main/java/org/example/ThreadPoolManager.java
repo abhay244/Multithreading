@@ -13,13 +13,13 @@ public class ThreadPoolManager {
                 executorService=Executors.newFixedThreadPool(threadPoolSize);
                 logger.log("Initiating threadpool of size: "+threadPoolSize);
             }
-           public  Future<Integer>submitTask(Callable<Integer> task){
+           public  Future<Long>submitTask(Callable<Long> task){
             return executorService.submit(task);
            }
-           List<Integer>processSubmittedTask(List<Future<Integer>> futureObjectList){
-            List<Integer>res=new ArrayList<>();
+           List<Long>processSubmittedTask(List<Future<Long>> futureObjectList){
+            List<Long>res=new ArrayList<>();
             try{
-            for(Future<Integer>futureObject:futureObjectList){
+            for(Future<Long>futureObject:futureObjectList){
                 if(futureObject.get()!=null){
                     res.add(futureObject.get());
                 }

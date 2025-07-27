@@ -1,21 +1,24 @@
+package org.example;
+
 import java.util.concurrent.Callable;
  
-public class FactorialThread implements Callable<Integer>{
-    private Integer val;
+public class FactorialThread implements Callable<Long>{
+    private Long val;
     private Log logger;
-    FactorialThread(Integer i){
+    private Long mod=1000000007L;
+    FactorialThread(Long i){
         this.val=i;
     }
     @Override
-    public Integer call(){
+    public Long call(){
         logger=new LogImpl(Thread.currentThread().getName()+"-"+val);
-        Integer factValue=calculatefactorial(val, logger);
+        Long factValue=calculatefactorial(val, logger);
         logger.log("factValue is: "+factValue);
         return factValue;
     }
 
-    public Integer calculatefactorial(Integer val, Log loggLog){
+    public Long calculatefactorial(Long val, Log loggLog){
         if(val==0 || val==1)return val;
-        else return val*calculatefactorial(val-1, loggLog);
+        else return (val*(calculatefactorial(val-1, loggLog)%mod))%mod;
     }
 }
